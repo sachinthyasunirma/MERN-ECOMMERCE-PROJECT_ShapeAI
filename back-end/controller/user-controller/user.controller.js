@@ -56,6 +56,48 @@ signUp = (req,res)=>{
         })
     })
 }
+
+signIn = (req,res)=>{
+    const{
+        email,
+        password
+    }=req.body
+    userModel.findOne({
+        email:email
+    }).exec((error,data)=>{
+        if(error){
+            return res.status(500).json({
+                success:false,
+                message:"please contact administration"
+            })
+        }
+        if(data){
+            const token = generateJwtToken(data._id)
+            const isAuthentication = data.authentication(password);
+            if(isAuthentication){
+                return res.status(200).json({
+                    success:true,
+                    data:{
+                        data,
+                        token:token
+                    }  
+                })
+            }else{
+                return res.json({
+                            success:false,
+                            message:"User Login failed. Bad Authentication",
+
+                })
+            }
+        }else{
+            return res.json({
+                success:false,
+                message:"User Email Does not exist."
+            })
+        }
+    })
+}
 module.exports = {
     signUp,
+    signIn
 }

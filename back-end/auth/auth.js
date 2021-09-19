@@ -11,7 +11,12 @@ validationSignUpRequest=[
         min:6
     }).withMessage("Password is required"),
 ]
-
+validationSignInRequest=[
+    check('email').notEmpty().withMessage("Email is required"),
+    check('password').isLength({
+        min:6
+    }).withMessage("Password is required"),
+]
 isRequestCorrect = (req, res, next) => {
     const errors = validationResult(req);
     // console.log(errors)
@@ -28,5 +33,6 @@ isRequestCorrect = (req, res, next) => {
 
 module.exports ={
     validationSignUpRequest,
-    isRequestCorrect
+    isRequestCorrect,
+    validationSignInRequest
 }

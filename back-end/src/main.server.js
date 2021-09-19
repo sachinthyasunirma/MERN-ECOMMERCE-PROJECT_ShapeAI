@@ -3,7 +3,7 @@ const env = require('dotenv');
 //init env
 env.config();
 //import db
-// const db = require('../database/db.connection');
+const db = require('../database/db.connection');
 //init express
 const app = express();
 

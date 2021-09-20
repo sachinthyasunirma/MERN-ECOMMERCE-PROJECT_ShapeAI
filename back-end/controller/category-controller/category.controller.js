@@ -31,11 +31,13 @@ addCategory = (req,res)=>{
 getCategory = async(req,res) =>{
     try{
         const category = await categoryModel.find({});
+
+        const categories= getsubcategory(category);
         if(category){
             return res.status(200).json({
                 success:true,
                 message:"Get all category's",
-                data:category
+                data:categories
             })
         }else{
             return res.json({
@@ -49,6 +51,28 @@ getCategory = async(req,res) =>{
             message:"DB Error Occured. Contact your administrator"
         })
     }
+}
+
+const getsubcategory = (category,parentId=null)=>{
+    let categoryList=[];
+    let _parentId;
+    if(parentId!=null){
+        _parentId=parentId;
+    }
+    const categories = category.filter(
+        (el)=>el.parentId==_parentId
+    )
+    for(let i=0;i<categories.length; i++){
+        const el = categories[i];
+        const ObjectCategory = {
+            _id:el._id,
+            name: el.name,
+            parentId:el.parentId,
+            "subcategory":getsubcategory(category, el._id)
+        }
+        categoryList.push(ObjectCategory);
+    }
+    return categoryList;
 }
 
 module.exports={

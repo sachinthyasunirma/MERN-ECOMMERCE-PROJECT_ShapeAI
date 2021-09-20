@@ -27,6 +27,30 @@ addCategory = ()=>{
     })
 }
 
+getCategory = async(req,res) =>{
+    try{
+        const category = await categoryModel.find({});
+        if(category){
+            return res.status(200).json({
+                success:true,
+                message:"Get all category's",
+                data:category
+            })
+        }else{
+            return res.json({
+                sucess:false,
+                message:"Category Empty"
+            })
+        }
+    }catch(error){
+        return res.status(500).json({
+            sucess:false,
+            message:"DB Error Occured. Contact your administrator"
+        })
+    }
+}
+
 module.exports={
     addCategory,
+    getCategory
 }

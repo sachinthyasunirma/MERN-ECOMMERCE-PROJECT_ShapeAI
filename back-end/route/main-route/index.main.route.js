@@ -5,5 +5,10 @@ const router = express.Router();
 const userRoute = require('../other-route/user-route/user.route');
 router.use("/user", userRoute);
 
+//category-route
+const categoryRoute = require('../other-route/category-route/category.route');
+router.use("/category");
 
+
+//exports
 module.exports = router;

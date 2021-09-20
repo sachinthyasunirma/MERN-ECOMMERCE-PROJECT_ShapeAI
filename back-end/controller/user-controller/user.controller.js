@@ -73,7 +73,7 @@ signIn = (req,res)=>{
         }
         if(data){
             const token = generateJwtToken(data._id)
-            const isAuthentication = data.authentication(password);
+            const isAuthentication = data.authenticate(password);
             if(isAuthentication){
                 return res.status(200).json({
                     success:true,

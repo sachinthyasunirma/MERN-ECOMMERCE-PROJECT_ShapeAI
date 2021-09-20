@@ -7,7 +7,7 @@ router.use("/user", userRoute);
 
 //category-route
 const categoryRoute = require('../other-route/category-route/category.route');
-router.use("/category");
+router.use("/category",categoryRoute);
 
 
 //exports

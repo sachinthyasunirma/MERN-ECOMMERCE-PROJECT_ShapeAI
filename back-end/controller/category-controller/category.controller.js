@@ -1,10 +1,11 @@
 const categoryModel = require('../../model/category-model/category.model')
 const slugify = require('slugify');
 
-addCategory = ()=>{
+addCategory = (req,res)=>{
+
     const inputCategory = {
         name: req.body.name,
-        slug: slugify(req.body.name)
+        slug: slugify(req.body.name,{lower:true})
     }
     if(req.body.parentId){
         inputCategory.parentId = req.body.parentId;

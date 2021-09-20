@@ -8,8 +8,8 @@ const{
 
 
 //Route
-router.post("/addCategory", addCategory);
-router.get("/getCategory", getCategory);
+router.post("/addcategory", addCategory);
+router.get("/getcategory", getCategory);
 
 
 module.exports = router;

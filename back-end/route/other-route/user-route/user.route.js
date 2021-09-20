@@ -4,7 +4,7 @@ const{
     isRequestCorrect,
     validationSignUpRequest,
     validationSignInRequest
-}=require('../../../auth/auth')
+}=require('../../../middleware/auth')
 const{
     signUp,
     signIn

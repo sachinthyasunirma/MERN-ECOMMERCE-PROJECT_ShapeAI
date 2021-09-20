@@ -6,9 +6,12 @@ const{
     getCategory
 }=require('../../../controller/category-controller/category.controller');
 
-
+const{
+    validationCategoryRequest,
+    isRequestCorrect
+}=require('../../../middleware/auth');
 //Route
-router.post("/addcategory", addCategory);
+router.post("/addcategory",validationCategoryRequest,isRequestCorrect, addCategory);
 router.get("/getcategory", getCategory);
 
 

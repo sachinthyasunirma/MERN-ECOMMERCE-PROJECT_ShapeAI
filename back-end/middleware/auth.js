@@ -17,6 +17,10 @@ validationSignInRequest=[
         min:6
     }).withMessage("Password is required"),
 ]
+validationCategoryRequest = [
+    check('name').notEmpty().withMessage("Name is required")
+]
+
 isRequestCorrect = (req, res, next) => {
     const errors = validationResult(req);
     // console.log(errors)
@@ -34,5 +38,6 @@ isRequestCorrect = (req, res, next) => {
 module.exports ={
     validationSignUpRequest,
     isRequestCorrect,
-    validationSignInRequest
+    validationSignInRequest,
+    validationCategoryRequest
 }

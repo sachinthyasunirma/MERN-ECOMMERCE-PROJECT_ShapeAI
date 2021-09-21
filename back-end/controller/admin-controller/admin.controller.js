@@ -32,6 +32,7 @@ signUp = (req,res)=>{
         }
         const _admin = new userModel({
             firstName, lastName, email, password,
+            role:"admin",
             userName: Math.random().toString()
         });
         _admin.save((error,data)=>{

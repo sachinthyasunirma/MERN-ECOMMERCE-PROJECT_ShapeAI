@@ -1,13 +1,10 @@
 const userModel  = require('../../model/user-model/user.model');
 const jsonwebtoken = require('jsonwebtoken');
 
-generateJwtToken = (_id) => {
-    return jsonwebtoken.sign({
-        id: _id
-    }, process.env.JWT_SECRET_KEY, {
-        expiresIn: '1d'
-    });
-}
+const{
+    generateJwtToken
+}=require('../../helper/common.index');
+
 
 signUp = (req,res)=>{
     const{
@@ -43,7 +40,7 @@ signUp = (req,res)=>{
                 })
             }
             if(data){
-                const token = generateJwtToken(data._id);
+                const token = generateJwtToken(data._id, data.role);
                 return res.status(200).json({
                     sucess:true,
                     message:"crate account successfully",
@@ -72,7 +69,7 @@ signIn = (req,res)=>{
             })
         }
         if(data){
-            const token = generateJwtToken(data._id)
+            const token = generateJwtToken(data._id, data.role)
             const isAuthentication = data.authenticate(password);
             if(isAuthentication){
                 return res.status(200).json({
